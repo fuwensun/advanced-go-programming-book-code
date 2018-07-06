@@ -17,7 +17,7 @@ func (p *HelloService) Hello(request string, reply *string) error {
 func main() {
 
 	//rpc 注册
-	rpc.RegisterName("HelloService", new(HelloService))
+	rpc.RegisterName("HelloService", new(HelloService))		//v1
 
 	//*TCPListener 建立
 	listener, err := net.Listen("tcp", ":1234")
@@ -30,7 +30,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Accept error:", err)
 	}
-	
+
 	//rpc绑定
 	rpc.ServeConn(conn)
 }

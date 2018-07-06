@@ -16,7 +16,7 @@ func (p *HelloService) Hello(request string, reply *string) error {
 
 func main() {
 
-	//rpc 注册
+	//rpc服务注册
 	rpc.RegisterName("HelloService", new(HelloService))		//v1
 
 	//*TCPListener 建立
@@ -31,6 +31,6 @@ func main() {
 		log.Fatal("Accept error:", err)
 	}
 
-	//rpc绑定
+	//rpc服务绑定
 	rpc.ServeConn(conn)
 }

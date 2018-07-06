@@ -4,6 +4,8 @@ import (
 	"net/rpc"
 	"log"
 	"fmt"
+	"net/rpc/jsonrpc"
+	"net"
 )
 const HelloServiceName = "path/to/pkg.HelloService"
 
@@ -15,11 +17,13 @@ type HelloServiceClient struct {
 //var _ HelloServiceInterface = (*HelloServiceClient)(nil)
 
 func DialHelloService(network, address string) (*HelloServiceClient, error) {
-	c, err := rpc.Dial(network, address)		//v3
+	//c, err := rpc.Dial(network, address)							//v3
+	c, err := net.Dial("tcp", "localhost:1234")//v5
+	client := rpc.NewClientWithCodec(jsonrpc.NewClientCodec(c))		//v5
 	if err != nil {
 		return nil, err
 	}
-	return &HelloServiceClient{Client: c}, nil
+	return &HelloServiceClient{Client: client}, nil
 }
 
 func (p *HelloServiceClient) Hello(request string, reply *string) error {
@@ -30,6 +34,7 @@ func main() {
 	//rpc 连线，生成*Client
 	//client, err := rpc.Dial("tcp", "localhost:1234") //v1
 	client, err := DialHelloService("tcp", "localhost:1234")//v3
+
 	if err != nil {
 		log.Fatal("dialing:", err)
 	}

@@ -15,7 +15,7 @@ type HelloServiceClient struct {
 //var _ HelloServiceInterface = (*HelloServiceClient)(nil)
 
 func DialHelloService(network, address string) (*HelloServiceClient, error) {
-	c, err := rpc.Dial(network, address)
+	c, err := rpc.Dial(network, address)//v3
 	if err != nil {
 		return nil, err
 	}

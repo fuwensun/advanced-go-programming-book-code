@@ -4,6 +4,7 @@ import (
 	"net/rpc"
 	"net"
 	"log"
+	"net/rpc/jsonrpc"
 )
 
 //服务接口定义
@@ -47,6 +48,7 @@ func main() {
 		}
 
 		//rpc服务绑定
-		go rpc.ServeConn(conn)
+		//go rpc.ServeConn(conn)								//v4
+		go rpc.ServeCodec(jsonrpc.NewServerCodec(conn))	//v5
 	}
 }

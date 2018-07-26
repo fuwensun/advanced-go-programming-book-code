@@ -1,0 +1,8 @@
+//e01
+syntax = "proto3";
+
+package main;
+
+message String {
+	string value = 1;
+}

@@ -1,4 +1,5 @@
-package rpcServer
+package main
+
 
 type HelloService struct{}
 

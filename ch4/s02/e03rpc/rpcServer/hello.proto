@@ -1,3 +1,4 @@
+//e01
 syntax = "proto3";
 
 package main;
@@ -6,6 +7,17 @@ message String {
 	string value = 1;
 }
 
+//e02
 service HelloService {
 	rpc Hello (String) returns (String);
 }
+
+/*
+在bash里执行
+$ protoc --go_out=plugins=grpc:. hello.proto
+protoc 			            命令
+--go_out=plugins=grpc:. 	生成的文件类型,插件和目录
+hello.proto 	            要编译的proto文件
+
+生成了一个hello.pb.go文件
+*/

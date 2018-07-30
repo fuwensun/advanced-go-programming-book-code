@@ -1,0 +1,36 @@
+//e01
+syntax = "proto3";
+
+package main;
+
+message String {
+	string value = 1;
+}
+
+//e02
+service HelloService {
+	rpc Hello (String) returns (String);
+}
+
+/*
+在bash里执行
+$ protoc --go_out=plugins=grpc:. hello.proto
+protoc 			            命令
+--go_out=plugins=grpc:. 	生成的文件类型,插件和目录
+hello.proto 	            要编译的proto文件
+
+生成了一个hello.pb.go文件
+*/
+
+/*
+protoc --go-netrpc01_out=plugins=netrpc:. hello2.proto
+
+protoc --go-netrpc02_out=plugins=netrpc:. hello2.proto
+
+--xxx_out格式的参数，那么protoc将首先查询是否有内置的xxx插件，
+如果没有内置的xxx插件那么将继续查询当前系统中是否存在protoc-gen-xxx命名的可执行程序，
+最终通过查询到的插件生成代码。
+
+其中--go-netrpc_out参数告知protoc编译器加载名为protoc-gen-go-netrpc的插件，
+插件中的plugins=netrpc指示启用内部唯一的名为netrpc的netrpcPlugin插件
+*/

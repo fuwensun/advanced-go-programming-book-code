@@ -22,7 +22,7 @@ func DialHelloService(network, address string) (*HelloServiceClient, error) {
 	return &HelloServiceClient{Client: c}, nil
 }
 
-func (p *HelloServiceClient) Hello(request string, reply *string) error {
+func (p *HelloServiceClient) Hello(request string, reply *string) error {	//v5
 	//return p.Client.Call(HelloServiceName+".Hello", request, reply)
 
 	var qq String

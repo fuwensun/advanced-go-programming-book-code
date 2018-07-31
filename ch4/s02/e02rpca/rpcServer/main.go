@@ -20,7 +20,7 @@ func RegisterHelloService(svc HelloServiceInterface) error {
 
 type HelloService struct{}
 
-func (p *HelloService) Hello(request String, reply *String) error {
+func (p *HelloService) Hello(request String, reply *String) error {		//v5
 	reply.Value = "hello:" + request.GetValue()
 	return nil
 }

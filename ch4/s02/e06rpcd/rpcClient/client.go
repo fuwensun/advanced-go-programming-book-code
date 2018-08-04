@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"fmt"
+	."github.com/advanced-go-programming-book-code/ch4/s02/e06rpcd/helloservice"
 )
 const HelloServiceName = "path/to/pkg.HelloService"
 

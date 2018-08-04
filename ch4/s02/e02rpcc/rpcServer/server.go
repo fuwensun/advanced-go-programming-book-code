@@ -4,6 +4,7 @@ import (
 	"net/rpc"
 	"net"
 	"log"
+	."github.com/advanced-go-programming-book-code/ch4/s02/e02rpcc/helloservice"
 )
 
 //服务接口定义

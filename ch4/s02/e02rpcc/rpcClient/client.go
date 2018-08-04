@@ -4,6 +4,7 @@ import (
 	"net/rpc"
 	"log"
 	"fmt"
+	."github.com/advanced-go-programming-book-code/ch4/s02/e02rpcc/helloservice"
 )
 const HelloServiceName = "path/to/pkg.HelloService"
 

@@ -34,7 +34,7 @@ func (m *String) Reset()         { *m = String{} }
 func (m *String) String() string { return proto.CompactTextString(m) }
 func (*String) ProtoMessage()    {}
 func (*String) Descriptor() ([]byte, []int) {
-	return fileDescriptor_hello_f668f7b6fadbc9ec, []int{0}
+	return fileDescriptor_hello_0af1fa4e228d172c, []int{0}
 }
 func (m *String) XXX_Unmarshal(b []byte) error {
 	return xxx_messageInfo_String.Unmarshal(m, b)
@@ -78,7 +78,7 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type PubsubServiceClient interface {
 	Publish(ctx context.Context, in *String, opts ...grpc.CallOption) (*String, error)
-	SubscribeTopic(ctx context.Context, in *String, opts ...grpc.CallOption) (PubsubService_SubscribeTopicClient, error)
+	Subscribe(ctx context.Context, in *String, opts ...grpc.CallOption) (PubsubService_SubscribeClient, error)
 }
 
 type pubsubServiceClient struct {
@@ -98,12 +98,12 @@ func (c *pubsubServiceClient) Publish(ctx context.Context, in *String, opts ...g
 	return out, nil
 }
 
-func (c *pubsubServiceClient) SubscribeTopic(ctx context.Context, in *String, opts ...grpc.CallOption) (PubsubService_SubscribeTopicClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_PubsubService_serviceDesc.Streams[0], "/helloservice.PubsubService/SubscribeTopic", opts...)
+func (c *pubsubServiceClient) Subscribe(ctx context.Context, in *String, opts ...grpc.CallOption) (PubsubService_SubscribeClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_PubsubService_serviceDesc.Streams[0], "/helloservice.PubsubService/Subscribe", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &pubsubServiceSubscribeTopicClient{stream}
+	x := &pubsubServiceSubscribeClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -113,16 +113,16 @@ func (c *pubsubServiceClient) SubscribeTopic(ctx context.Context, in *String, op
 	return x, nil
 }
 
-type PubsubService_SubscribeTopicClient interface {
+type PubsubService_SubscribeClient interface {
 	Recv() (*String, error)
 	grpc.ClientStream
 }
 
-type pubsubServiceSubscribeTopicClient struct {
+type pubsubServiceSubscribeClient struct {
 	grpc.ClientStream
 }
 
-func (x *pubsubServiceSubscribeTopicClient) Recv() (*String, error) {
+func (x *pubsubServiceSubscribeClient) Recv() (*String, error) {
 	m := new(String)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -133,7 +133,7 @@ func (x *pubsubServiceSubscribeTopicClient) Recv() (*String, error) {
 // PubsubServiceServer is the server API for PubsubService service.
 type PubsubServiceServer interface {
 	Publish(context.Context, *String) (*String, error)
-	SubscribeTopic(*String, PubsubService_SubscribeTopicServer) error
+	Subscribe(*String, PubsubService_SubscribeServer) error
 }
 
 func RegisterPubsubServiceServer(s *grpc.Server, srv PubsubServiceServer) {
@@ -158,24 +158,24 @@ func _PubsubService_Publish_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _PubsubService_SubscribeTopic_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _PubsubService_Subscribe_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(String)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(PubsubServiceServer).SubscribeTopic(m, &pubsubServiceSubscribeTopicServer{stream})
+	return srv.(PubsubServiceServer).Subscribe(m, &pubsubServiceSubscribeServer{stream})
 }
 
-type PubsubService_SubscribeTopicServer interface {
+type PubsubService_SubscribeServer interface {
 	Send(*String) error
 	grpc.ServerStream
 }
 
-type pubsubServiceSubscribeTopicServer struct {
+type pubsubServiceSubscribeServer struct {
 	grpc.ServerStream
 }
 
-func (x *pubsubServiceSubscribeTopicServer) Send(m *String) error {
+func (x *pubsubServiceSubscribeServer) Send(m *String) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -190,25 +190,25 @@ var _PubsubService_serviceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "SubscribeTopic",
-			Handler:       _PubsubService_SubscribeTopic_Handler,
+			StreamName:    "Subscribe",
+			Handler:       _PubsubService_Subscribe_Handler,
 			ServerStreams: true,
 		},
 	},
 	Metadata: "hello.proto",
 }
 
-func init() { proto.RegisterFile("hello.proto", fileDescriptor_hello_f668f7b6fadbc9ec) }
+func init() { proto.RegisterFile("hello.proto", fileDescriptor_hello_0af1fa4e228d172c) }
 
-var fileDescriptor_hello_f668f7b6fadbc9ec = []byte{
-	// 140 bytes of a gzipped FileDescriptorProto
+var fileDescriptor_hello_0af1fa4e228d172c = []byte{
+	// 135 bytes of a gzipped FileDescriptorProto
 	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0xe2, 0xce, 0x48, 0xcd, 0xc9,
 	0xc9, 0xd7, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0xe2, 0x01, 0x73, 0x8a, 0x53, 0x8b, 0xca, 0x32,
 	0x93, 0x53, 0x95, 0xe4, 0xb8, 0xd8, 0x82, 0x4b, 0x8a, 0x32, 0xf3, 0xd2, 0x85, 0x44, 0xb8, 0x58,
-	0xcb, 0x12, 0x73, 0x4a, 0x53, 0x25, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0x20, 0x1c, 0xa3, 0x36,
+	0xcb, 0x12, 0x73, 0x4a, 0x53, 0x25, 0x18, 0x15, 0x18, 0x35, 0x38, 0x83, 0x20, 0x1c, 0xa3, 0x46,
 	0x46, 0x2e, 0xde, 0x80, 0xd2, 0xa4, 0xe2, 0xd2, 0xa4, 0x60, 0x88, 0x0e, 0x21, 0x53, 0x2e, 0xf6,
 	0x80, 0xd2, 0xa4, 0x9c, 0xcc, 0xe2, 0x0c, 0x21, 0x11, 0x3d, 0x64, 0xb3, 0xf4, 0x20, 0x06, 0x49,
-	0x61, 0x15, 0x15, 0xb2, 0xe3, 0xe2, 0x0b, 0x2e, 0x4d, 0x2a, 0x4e, 0x2e, 0xca, 0x4c, 0x4a, 0x0d,
-	0xc9, 0x2f, 0xc8, 0x4c, 0x26, 0x45, 0xb7, 0x01, 0x63, 0x12, 0x1b, 0xd8, 0xf5, 0xc6, 0x80, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0x41, 0xc8, 0x0b, 0xb0, 0xcc, 0x00, 0x00, 0x00,
+	0x61, 0x15, 0x15, 0xb2, 0xe4, 0xe2, 0x0c, 0x2e, 0x4d, 0x2a, 0x4e, 0x2e, 0xca, 0x4c, 0x4a, 0x25,
+	0x45, 0xa3, 0x01, 0x63, 0x12, 0x1b, 0xd8, 0xe1, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0x6e,
+	0xf2, 0xde, 0x40, 0xc7, 0x00, 0x00, 0x00,
 }

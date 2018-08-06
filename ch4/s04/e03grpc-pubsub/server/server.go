@@ -36,37 +36,16 @@ func (p *PubsubService) Publish(
 	//debug
 }
 
+
 func (p *PubsubService) Subscribe(
-	arg *String, stream PubsubService_SubscribeTopicServer,
+	arg *String, stream PubsubService_SubscribeServer,
 ) error {
 	ch := p.pub.SubscribeTopic(func(v interface{}) bool {
 		if key, ok := v.(string); ok {
-			if strings.HasPrefix(arg.GetValue(),key) {
-				return true
-			}
-			key = key;
-		}
-		return false
-	})
-
-	for v := range ch {
-		if err := stream.Send(&String{Value: v.(string)}); err != nil {
-			return err
-		}
-	}
-	fmt.Println("Subscribe")
-	return nil
-}
-
-func (p *PubsubService) SubscribeTopic(
-	arg *String, stream PubsubService_SubscribeTopicServer,
-) error {
-	ch := p.pub.SubscribeTopic(func(v interface{}) bool {
-		if key, ok := v.(string); ok {
-			fmt.Print(ok)
-			fmt.Println("  " + key)
-			fmt.Println(strings.HasPrefix(key,arg.GetValue()))
-			//fmt.Println(strings.HasPrefix(arg.GetValue(),key))
+			//debug
+			fmt.Printf("<debug> %t %s %s %t\n",
+				ok,arg.GetValue(),key,strings.HasPrefix(key,arg.GetValue()))
+			//debug
 			if strings.HasPrefix(key,arg.GetValue()) {
 				return true
 			}
@@ -80,7 +59,6 @@ func (p *PubsubService) SubscribeTopic(
 		}
 	}
 
-	fmt.Println("SubscribeTopic")
 	return nil
 }
 

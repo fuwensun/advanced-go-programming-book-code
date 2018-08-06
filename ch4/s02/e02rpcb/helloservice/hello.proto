@@ -1,7 +1,7 @@
 //e01
 syntax = "proto3";
 
-package main;
+package helloservice;
 
 message String {
 	string value = 1;

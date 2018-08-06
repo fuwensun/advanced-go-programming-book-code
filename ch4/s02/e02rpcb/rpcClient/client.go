@@ -4,6 +4,7 @@ import (
 	"net/rpc"
 	"log"
 	"fmt"
+	."github.com/advanced-go-programming-book-code/ch4/s02/e02rpcb/helloservice"
 )
 const HelloServiceName = "path/to/pkg.HelloService"
 
@@ -64,5 +65,5 @@ func main() {
 	}
 
 	//打印回复
-	fmt.Println(reply)
+	fmt.Println(reply.GetValue())
 }

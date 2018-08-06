@@ -4,7 +4,7 @@ import (
 	"google.golang.org/grpc"
 	"log"
 	"fmt"
-	."github.com/advanced-go-programming-book-code/ch4/s04/e01grpc-stream/helloservice"
+	."github.com/advanced-go-programming-book-code/ch4/s04/e02grpc-stream/helloservice"
 	"context"
 	"time"
 	"io"
@@ -24,7 +24,7 @@ func main() {
 	}
 	fmt.Println(reply.GetValue())
 
-	//
+	//grpc stream
 	stream, err := client.Channel(context.Background())
 	if err != nil {
 		log.Fatal(err)

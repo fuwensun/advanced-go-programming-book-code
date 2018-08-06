@@ -4,7 +4,7 @@ import (
 	"context"
 	"net"
 	"log"
-	."github.com/advanced-go-programming-book-code/ch4/s04/e01grpc-stream/helloservice"
+	."github.com/advanced-go-programming-book-code/ch4/s04/e02grpc-stream/helloservice"
 	"google.golang.org/grpc"
 	"io"
 )

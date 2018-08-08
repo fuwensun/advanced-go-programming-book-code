@@ -10,10 +10,41 @@ import (
 	"github.com/golang/protobuf/proto"
 	"os"
 	"io/ioutil"
+	"image"
+	"io"
+	"image/png"
+	"image/jpeg"
+	"fmt"
 )
+
+// 字符串数组
+var s1 = [2]string{"hello", "world"}
+var s2 = [...]string{"你好", "世界"}
+var s3 = [...]string{1: "世界", 0: "你好", }
+
+// 结构体数组
+var line1 [2]image.Point
+var line2 = [...]image.Point{image.Point{X: 0, Y: 0}, image.Point{X: 1, Y: 1}}
+var line3 = [...]image.Point{{0, 0}, {1, 1}}
+
+// 图像解码器数组
+var decoder1 [2]func(io.Reader) (image.Image, error)
+var decoder2 = [...]func(io.Reader) (image.Image, error){
+	png.Decode,
+	jpeg.Decode,
+}
+
+// 接口数组
+var unknown1 [2]interface{}
+var unknown2 = [...]interface{}{123, "你好"}
+
+// 管道数组
+var chanList = [2]chan int{}
 
 func init() {
 	generator.RegisterPlugin(new(netrpcPlugin))
+
+	fmt.Printf("%#t\n", []byte("Hello, 世界"))
 }
 
 type netrpcPlugin struct{ *generator.Generator }

@@ -1,17 +1,16 @@
 package main
 
 import (
-	"time"
-	"google.golang.org/grpc"
-	"net"
-	"log"
-	."github.com/advanced-go-programming-book-code/ch4/s04/e03grpc-pubsub/helloservice"
-	"github.com/docker/docker/pkg/pubsub"
 	"context"
-	"strings"
 	"fmt"
+	. "github.com/advanced-go-programming-book-code/ch4/s04/e03grpc-pubsub/helloservice"
+	"github.com/docker/docker/pkg/pubsub"
+	"google.golang.org/grpc"
+	"log"
+	"net"
+	"strings"
+	"time"
 )
-
 
 type PubsubService struct {
 	pub *pubsub.Publisher
@@ -36,7 +35,6 @@ func (p *PubsubService) Publish(
 	//debug
 }
 
-
 func (p *PubsubService) Subscribe(
 	arg *String, stream PubsubService_SubscribeServer,
 ) error {
@@ -44,9 +42,9 @@ func (p *PubsubService) Subscribe(
 		if key, ok := v.(string); ok {
 			//debug
 			fmt.Printf("<debug> %t %s %s %t\n",
-				ok,arg.GetValue(),key,strings.HasPrefix(key,arg.GetValue()))
+				ok, arg.GetValue(), key, strings.HasPrefix(key, arg.GetValue()))
 			//debug
-			if strings.HasPrefix(key,arg.GetValue()) {
+			if strings.HasPrefix(key, arg.GetValue()) {
 				return true
 			}
 		}
@@ -64,7 +62,7 @@ func (p *PubsubService) Subscribe(
 
 func main() {
 	grpcServer := grpc.NewServer()
-	RegisterPubsubServiceServer(grpcServer,NewPubsubService())
+	RegisterPubsubServiceServer(grpcServer, NewPubsubService())
 
 	lis, err := net.Listen("tcp", ":1234")
 	if err != nil {

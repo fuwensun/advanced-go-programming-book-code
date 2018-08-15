@@ -1,6 +1,6 @@
 package main
 
-//#include "hello.h"
+//void SayHello(const char* s);
 import "C"
 
 func main() {

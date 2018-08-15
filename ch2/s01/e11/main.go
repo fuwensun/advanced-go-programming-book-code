@@ -1,6 +1,8 @@
+// +build go1.10
+
 package main
 
-//void SayHello(char* s);
+//void SayHello(_GoString_ s);
 import "C"
 
 import (
@@ -8,10 +10,10 @@ import (
 )
 
 func main() {
-	C.SayHello(C.CString("Hello, World\n"))
+	C.SayHello("Hello, World\n")
 }
 
 //export SayHello
-func SayHello(s *C.char) {
-	fmt.Print(C.GoString(s))
+func SayHello(s string) {
+	fmt.Print(s)
 }

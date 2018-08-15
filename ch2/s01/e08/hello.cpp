@@ -1,6 +1,6 @@
 // hello.cpp
 
-#include <iostream.h>
+#include <iostream>
 
 extern "C" {
 	#include "hello.h"
